@@ -3,12 +3,14 @@ import express from "express";
 import dotenv from "dotenv"
 import connectDB from "./utils/connection";
 import swaggerDocs from "./utils/swagger";
-import userRoutes from "./routes/auth.route"
+import userRoutes from "./routes/user.route"
+import authRoutes from "./routes/auth.route"
 dotenv.config()
 const PORT=process.env.PORT as any as number;
 const base_url=process.env.BASE_URL;
 const app = express()
 app.use(express.json());
+app.use(`${base_url}`,authRoutes)
 app.use(`${base_url}`,userRoutes)
 
 swaggerDocs(app,PORT);
