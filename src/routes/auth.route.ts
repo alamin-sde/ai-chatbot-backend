@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { createUser, getUsers, login } from "../controllers/user.controller";
+import { auth } from "../middleware/auth.middleware";
 
 const router = Router();
 /**
@@ -9,12 +10,14 @@ const router = Router();
  *     summary: Retrieve all users
  *     tags: [Users]
  *     security:
- *       - BearerAuth: [] 
+ *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: List of users
+ *         description: Secret data unlocked
+ *       401:
+ *         description: Unauthorized
  */
-router.get("/users", getUsers)
+router.get("/users",auth, getUsers)
 
 /**
  * @swagger
@@ -72,10 +75,10 @@ router.post("/register", createUser)
  *             properties:
  *                 username:
  *                   type: string
- *                   example: "Alamin Islam"
+ *                   example: "alamin@ai.com"
  *                 password:
  *                   type: string
- *                   example: "alamin@123"
+ *                   example: "ai@123"
  *     responses:
  *       201:
  *         description: login successfully
