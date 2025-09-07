@@ -1,5 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import { IUserSchema } from "../types/user.schema.type";
+import { NextFunction } from "express";
+import bcrypt  from "bcrypt"
 const userSchema: Schema<IUserSchema> = new mongoose.Schema({
     username: {
         type: String
@@ -10,19 +12,30 @@ const userSchema: Schema<IUserSchema> = new mongoose.Schema({
     email: {
         type: String
     },
+    isActive: {
+        type: Boolean,
+        default: true
+    },
     createdAt: {
         type: Date
     },
     updatedAt: {
         type: Date
-    },
-    isActive: {
-        type: Boolean,
-        default: true
     }
 })
+userSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) return next();
+    try {
+        const salt = await bcrypt.genSalt(12);
+        this.password = await bcrypt.hash(this.password, salt);
+        next();
+    } catch (error: any) {
+        next(error)
+    }
+
+
+});
 userSchema.methods.comparePassword = async function (candidatePassword: string) {
-    console.log("candidate password-->", candidatePassword)
     return candidatePassword == this.password
 
 }
