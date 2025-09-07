@@ -16,7 +16,7 @@ const options: swaggerJsDoc.Options = {
                 bearerAuth: {
                     type: "http",
                     scheme: "bearer",
-                    bearerFormat: " JWT"
+                    bearerFormat: "JWT"
                 }
             }
         },
