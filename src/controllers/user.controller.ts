@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import User from "../models/user.model"
 import { UserRegisterType } from "../types/register.type";
-import { LoginType } from "../types/login.type";
 import { generateToken } from "../middleware/generateToken";
 
 
