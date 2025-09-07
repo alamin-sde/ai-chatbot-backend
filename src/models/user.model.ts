@@ -1,29 +1,29 @@
 import mongoose, { Schema } from "mongoose";
 import { IUserSchema } from "../types/user.schema.type";
-const userSchema:Schema<IUserSchema> = new mongoose.Schema({
-    username:{
-        type:String
+const userSchema: Schema<IUserSchema> = new mongoose.Schema({
+    username: {
+        type: String
     },
-    password:{
-        type:String
+    password: {
+        type: String
     },
-    email:{
-        type:String
+    email: {
+        type: String
     },
-    createdAt:{
-        type:Date
+    createdAt: {
+        type: Date
     },
-    updatedAt:{
-        type:Date
+    updatedAt: {
+        type: Date
     },
-    isActive:{
-        type:Boolean,
-        default:true
+    isActive: {
+        type: Boolean,
+        default: true
     }
 })
-userSchema.methods.comparePassword=async function(candidatePassword:string){
-    console.log("candidate password-->",candidatePassword)
-    return candidatePassword==this.password
+userSchema.methods.comparePassword = async function (candidatePassword: string) {
+    console.log("candidate password-->", candidatePassword)
+    return candidatePassword == this.password
 
 }
 
