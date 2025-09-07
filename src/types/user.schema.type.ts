@@ -5,5 +5,6 @@ export interface IUserSchema extends Document{
   password:string
   createdAt:Date
   updatedAt:Date,
+  isActive:boolean,
   comparePassword(candidatePassword: string):Promise<boolean>
 }

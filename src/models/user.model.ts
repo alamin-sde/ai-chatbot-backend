@@ -15,6 +15,10 @@ const userSchema:Schema<IUserSchema> = new mongoose.Schema({
     },
     updatedAt:{
         type:Date
+    },
+    isActive:{
+        type:Boolean,
+        default:true
     }
 })
 userSchema.methods.comparePassword=async function(candidatePassword:string){
