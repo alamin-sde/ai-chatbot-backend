@@ -5,6 +5,7 @@ import connectDB from "./utils/connection";
 import swaggerDocs from "./utils/swagger";
 import userRoutes from "./routes/user.route"
 import authRoutes from "./routes/auth.route"
+import chatRoutes from "./routes/chat.route"
 import cors from "cors"
 dotenv.config()
 const PORT=process.env.PORT as any as number;
@@ -17,6 +18,7 @@ app.use(cors({
 app.use(express.json());
 app.use(`${base_url}`,authRoutes)
 app.use(`${base_url}`,userRoutes)
+app.use(`${base_url}`,chatRoutes)
 
 swaggerDocs(app,PORT);
 const startServer=async()=>{
