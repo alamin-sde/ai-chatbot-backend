@@ -1,6 +1,7 @@
 import router, { Request, Response } from "express"
-export const getQuickReplies=(req:Request,res:Response)=>{
-    const quickReplies = [
+import { validationResult } from "express-validator";
+export const getQuickReplies = (req: Request, res: Response) => {
+  const quickReplies = [
     "Hello! How can you help me today?",
     "What are your capabilities?",
     "Tell me a joke",
@@ -11,5 +12,17 @@ export const getQuickReplies=(req:Request,res:Response)=>{
     "Goodbye"
   ];
   res.json(quickReplies)
+
+}
+
+export const sendMessage = async (req: Request, res: Response) => {
+  console.log(req.body)
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    res.status(400).json({
+      error: "Validation failed",
+      details: errors.array()
+    })
+  }
 
 }
