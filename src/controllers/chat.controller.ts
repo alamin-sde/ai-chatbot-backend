@@ -10,6 +10,6 @@ export const getQuickReplies=(req:Request,res:Response)=>{
     "Thank you!",
     "Goodbye"
   ];
-  res.json({quickReplies})
+  res.json(quickReplies)
 
 }
