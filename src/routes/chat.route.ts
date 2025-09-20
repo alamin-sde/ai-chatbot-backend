@@ -64,7 +64,7 @@ router.get("/chat/quick-replies", auth, getQuickReplies)
  */
 
 router.post("/chat/send-message", auth,[
-    body('message').trim().isLength({ min: 1, max: 2 }).withMessage('Message must be between 1 and 2000 characters'),
+    body('message').trim().isLength({ min: 1, max: 2000 }).withMessage('Message must be between 1 and 2000 characters'),
     body('sessionId').optional().isString()
 ], sendMessage)
 export default router

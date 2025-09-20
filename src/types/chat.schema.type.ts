@@ -12,5 +12,5 @@ export interface IChatSchemaType extends Document{
     createdAt:Date,
     updatedAt:Date,
     addMessage:(data:MessageDataType)=>void,
-    getContext:(data:number)=>MessageDataType
+    getContext:(data:number)=>MessageDataType[]
 }
