@@ -63,7 +63,7 @@ router.get("/chat/quick-replies", auth, getQuickReplies)
  *                     type: string
  */
 
-router.post("/chat/send-message", [
+router.post("/chat/send-message", auth,[
     body('message').trim().isLength({ min: 1, max: 2 }).withMessage('Message must be between 1 and 2000 characters'),
     body('sessionId').optional().isString()
 ], sendMessage)
