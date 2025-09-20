@@ -13,5 +13,6 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
     if (!user) {
         return res.status(401).json({ error: "Unauthorized" })
     }
+    (req as any).userId= user.id
     next()
-}
+} 
