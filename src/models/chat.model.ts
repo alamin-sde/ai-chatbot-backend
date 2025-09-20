@@ -1,5 +1,6 @@
-import mongoose from "mongoose"
+import mongoose, { Schema } from "mongoose"
 import { MessageDataType } from "../types/message.type"
+import { IChatSchemaType } from "../types/chat.schema.type"
 const messageSchema = new mongoose.Schema({
     role: {
         type: String,
@@ -22,7 +23,7 @@ const messageSchema = new mongoose.Schema({
     }
 })
 
-const chatSchema = new mongoose.Schema({
+const chatSchema:Schema<IChatSchemaType> = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -47,7 +48,7 @@ const chatSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
-    updateddAt: {
+    updatedAt: {
         type: Date,
         default: Date.now()
     }
@@ -72,4 +73,4 @@ chatSchema.methods.getContext = function (limit: number = 10) {
         })
 
 }
-module.exports = mongoose.model('Chat', chatSchema)
+export default mongoose.model<IChatSchemaType>('Chat', chatSchema)
