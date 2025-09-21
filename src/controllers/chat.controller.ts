@@ -5,6 +5,7 @@ import { generateUniqueId } from "../utils/generate-unique-id";
 import { MessageDataType } from "../types/message.type";
 import dotenv from "dotenv"
 import OpenAI from "openai";
+import mongoose from "mongoose";
 dotenv.config()
 export const getQuickReplies = (req: Request, res: Response) => {
   const quickReplies = [
@@ -84,6 +85,39 @@ export const sendMessage = async (req: Request, res: Response) => {
 
   } catch (error) {
     console.log(error)
+  }
+
+
+}
+export const getChatHistory = async (req: Request, res: Response) => {
+  try {
+    const userId = (req as any).userId;
+    const searchTitle = req.body.searchTitle;
+    if (!userId) {
+      res.status(404).json({
+        message: "No chat history found!"
+      })
+
+    }
+    const pipeline: any = {};
+    pipeline.userId = userId;
+    if (searchTitle) {
+      pipeline.title = { $regex: searchTitle, $options: 'i' }
+    }
+    const chats = await Chat.find({
+      ...pipeline
+    }).select({
+      userId: 1,
+      sessionId: 1,
+      title: 1,
+      _id: 0
+    })
+
+    res.status(201).json(chats)
+
+  } catch (error) {
+    console.log("Failed to fetch chat history", error)
+
   }
 
 

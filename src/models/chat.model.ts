@@ -23,7 +23,7 @@ const messageSchema = new mongoose.Schema({
     }
 })
 
-const chatSchema:Schema<IChatSchemaType> = new mongoose.Schema({
+const chatSchema:Schema<IChatSchemaType> = new mongoose.Schema<IChatSchemaType>({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',

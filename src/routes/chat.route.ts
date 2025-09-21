@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getQuickReplies, sendMessage } from "../controllers/chat.controller";
+import { getChatHistory, getQuickReplies, sendMessage } from "../controllers/chat.controller";
 import { auth } from "../middleware/auth.middleware";
 import { body } from "express-validator";
 const router = Router();
@@ -67,4 +67,28 @@ router.post("/chat/send-message", auth,[
     body('message').trim().isLength({ min: 1, max: 2000 }).withMessage('Message must be between 1 and 2000 characters'),
     body('sessionId').optional().isString()
 ], sendMessage)
+
+/**
+ * @swagger
+ * /api/v1/chat/chat-history:
+ *   post:
+ *     summary: Search chat history
+ *     tags: [Chat]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               searchTitle:
+ *                 type: string
+ *                 example: "react"
+ *              
+ *     responses:
+ *       201:
+ *         description: Message sent successfully
+ *        
+ */
+router.post("/chat/chat-history",auth, getChatHistory)
 export default router
