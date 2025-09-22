@@ -58,7 +58,7 @@ export const sendMessage = async (req: Request, res: Response) => {
       messages: [
         {
           role: 'system',
-          content: process.env.OPENAI_API_PROMT
+          content: process.env.OPENAI_API_PROMPT
         },
         ...context as any
       ]
